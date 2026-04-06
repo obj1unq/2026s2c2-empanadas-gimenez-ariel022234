@@ -2,6 +2,8 @@
 object galvan {
     const jefe = gimenez
     var sueldo = 15000
+    var dinero = 0
+    var deuda = 0
 
     method sueldo() {
         return sueldo
@@ -11,6 +13,38 @@ object galvan {
       sueldo = nuevoSueldo
     }
 
+    method cobrarSueldo() {
+      if (sueldo >= deuda ) {
+        dinero = dinero + self.sueldo() - deuda
+      }
+      else {
+        dinero = 0
+        deuda = (self.sueldo() - deuda) * -1
+      }
+
+       
+    }
+
+    method gastar(cantidad) {
+        if (dinero >= cantidad) {
+          dinero = dinero - cantidad
+        }
+        else {
+            deuda = (dinero - cantidad) * -1
+        }
+      }
+
+
+    method dinero() {
+      return dinero
+    }
+
+    method deuda() {
+      return deuda
+    }
+
+
+
 }
 
 object baigorria {
@@ -19,13 +53,7 @@ object baigorria {
     var empanadasVendidas = 0
     var sueldoAcumulado = 0
 
-    method totalCobrado() {
-        return self.sueldoAcumulado()
-    }
 
-    method sueldoAcumulado() {
-      sueldoAcumulado = sueldoAcumulado + self.sueldo()
-    }
 
     method venderEmpanada (numeroAVender) {
         empanadasVendidas = empanadasVendidas + numeroAVender
@@ -36,6 +64,18 @@ object baigorria {
       return empanadasVendidas
     } 
 
+
+    method cobrarSueldo() {
+      sueldoAcumulado = sueldoAcumulado + self.sueldo()
+      empanadasVendidas = 0
+      
+    }
+
+    method totalCobrado()  {
+      return sueldoAcumulado 
+    } 
+
+    
 
     method sueldo() {
        return self.empanadasVendidas() * precioEmpanada

@@ -1,9 +1,7 @@
 //Escribir aqui los objetos
 object galvan {
-    const jefe = gimenez
     var sueldo = 15000
-    var dinero = 0
-    var deuda = 0
+    var saldo = 0
 
     method sueldo() {
         return sueldo
@@ -14,35 +12,32 @@ object galvan {
     }
 
     method cobrarSueldo() {
-      if (sueldo >= deuda ) {
-        dinero = dinero + self.sueldo() - deuda
-        deuda = 0
-      
-      }
-      else {
-        dinero = 0
-        deuda = deuda + (self.sueldo() - deuda) * -1
-      }
+        saldo = saldo + sueldo
 
        
     }
 
     method gastar(cantidad) {
-        if (dinero >= cantidad) {
-          dinero = dinero - cantidad
-        }
-        else {
-            deuda = deuda + (dinero - cantidad) * -1
-        }
+        saldo = saldo - cantidad
       }
 
 
     method dinero() {
-      return dinero
+      if (saldo <= 0) {
+          return 0
+      }
+      else {
+        return saldo
+      }
     }
 
     method deuda() {
-      return deuda
+      if (saldo <= 0) {
+        return saldo * -1
+      }
+      else {
+        return 0
+      }
     }
 
 
@@ -50,7 +45,6 @@ object galvan {
 }
 
 object baigorria {
-    const jefe = gimenez
     var precioEmpanada = 15
     var empanadasVendidas = 0
     var sueldoAcumulado = 0
@@ -89,15 +83,13 @@ object baigorria {
 
 object gimenez {
   var fondos = 300000 
-  const empleadoG = galvan
-  const empleadoB = baigorria
 
   method fondo() {
     return fondos
   }
 
   method sueldoGalvan(sueldo) {
-    empleadoG.sueldo(sueldo)
+    galvan.sueldo(sueldo)
   }
 
   method pagarSueldo(empleado) {

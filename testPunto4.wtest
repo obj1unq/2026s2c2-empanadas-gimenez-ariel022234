@@ -1,0 +1,12 @@
+import empleados.*
+
+describe "Pago Sueldo" {
+  test "Pago a galvan (Sueldo suficiente)" {
+        assert.equals(300000, gimenez.fondo())
+        gimenez.pagarA(galvan)
+        assert.equals(15000, galvan.dinero())
+  }
+
+
+
+}

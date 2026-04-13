@@ -2,6 +2,7 @@
 object galvan {
     var sueldo = 15000
     var saldo = 0
+    var deuda = 0
 
     method sueldo() {
         return sueldo
@@ -12,7 +13,8 @@ object galvan {
     }
 
     method cobrarSueldo() {
-        saldo = saldo + sueldo
+        saldo = saldo + sueldo - deuda
+      deuda = deuda + sueldo
 
        
     }
@@ -23,21 +25,11 @@ object galvan {
 
 
     method dinero() {
-      if (saldo <= 0) {
-          return 0
-      }
-      else {
-        return saldo
-      }
+     return saldo 
     }
 
     method deuda() {
-      if (saldo <= 0) {
-        return saldo * -1
-      }
-      else {
-        return 0
-      }
+     
     }
 
 
@@ -88,14 +80,15 @@ object gimenez {
     return fondos
   }
 
-  method sueldoGalvan(sueldo) {
-    galvan.sueldo(sueldo)
+  method pagarA(empleado) {
+    empleado.cobrarSueldo()
+    fondos = fondos - empleado.sueldo()
+
   }
 
   method pagarSueldo(empleado) {
     if (fondos >= empleado.sueldo()) {
-      fondos = fondos - empleado.sueldo()
-      empleado.cobrarSueldo()
+      self.pagarA(empleado)
     }
     else {
       self.error("fondos insuficientes" + empleado.sueldo())

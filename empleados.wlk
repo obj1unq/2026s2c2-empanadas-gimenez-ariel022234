@@ -93,8 +93,13 @@ object gimenez {
   }
 
   method pagarSueldo(empleado) {
-    fondos = fondos - empleado.sueldo() 
-    empleado.cobrarSueldo()
+    if (fondos >= empleado.sueldo()) {
+      fondos = fondos - empleado.sueldo()
+      empleado.cobrarSueldo()
+    }
+    else {
+      self.error("fondos insuficientes" + empleado.sueldo())
+    }
     
   }
 
